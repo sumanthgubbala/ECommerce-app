@@ -24,7 +24,13 @@ class _IntroPageState extends State<IntroPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 30),
-            Text("Welcome to E C H O"),
+            Text(
+              "Welcome to E C H O",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
 
             SizedBox(height: 15),
             Text(

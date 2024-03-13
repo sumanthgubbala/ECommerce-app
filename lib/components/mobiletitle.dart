@@ -50,7 +50,7 @@ class Mobiles extends StatelessWidget {
                       mobile.name,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 9,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -62,6 +62,13 @@ class Mobiles extends StatelessWidget {
                     )
                   ],
                 ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.remove)),
+                Text(
+                  "0",
+                  style: TextStyle(color: Colors.grey),
+                ),
+
+                IconButton(onPressed: () {}, icon: Icon(Icons.add)),
                 //plus button
                 GestureDetector(
                   onTap: onTap,
@@ -75,7 +82,6 @@ class Mobiles extends StatelessWidget {
                     child: Icon(
                       Icons.add,
                       color: Colors.white,
-                      
                     ),
                   ),
                 )

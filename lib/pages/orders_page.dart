@@ -13,7 +13,10 @@ class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("My Orders"),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Icon(Icons.shopping_cart_checkout)],
+      ),
     );
   }
 }

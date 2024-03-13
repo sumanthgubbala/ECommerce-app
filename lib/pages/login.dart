@@ -36,17 +36,20 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(104, 11, 160, 234),
-          elevation: 4,
-          title: Text(
-            'SignUp ',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          appBar: AppBar(
+            backgroundColor: Color.fromARGB(104, 11, 160, 234),
+            elevation: 4,
+            title: Text(
+              'SignUp ',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        backgroundColor: Colors.transparent,
-        body: _page(),
-      ),
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            
+            padding: EdgeInsets.symmetric(vertical: 150),
+            child: _page(),
+          )),
     );
   }
 

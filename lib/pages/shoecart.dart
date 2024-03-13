@@ -3,23 +3,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/products/cart.dart';
 import 'package:flutter_application_1/products/mobile.dart';
+import 'package:flutter_application_1/products/shoes.dart';
 import 'package:provider/provider.dart';
 
-class Cartitems extends StatefulWidget {
+class ShoeCarts extends StatefulWidget {
   final CartItem cartItem;
 
-  const Cartitems({Key? key, required this.cartItem}) : super(key: key);
+  const ShoeCarts({Key? key, required this.cartItem}) : super(key: key);
 
   @override
-  State<Cartitems> createState() => _CartitemsState();
+  State<ShoeCarts> createState() => _CartitemsState();
 }
 
-class _CartitemsState extends State<Cartitems> {
+class _CartitemsState extends State<ShoeCarts> {
   void removeItem() {
     Provider.of<Cart>(context, listen: false).removeFromCart(widget.cartItem);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${widget.cartItem.mobile!.name} removed from cart.'),
+        content: Text('${widget.cartItem.shoes!.name} removed from cart.'),
         duration: Duration(seconds: 2),
       ),
     );
@@ -33,17 +34,17 @@ class _CartitemsState extends State<Cartitems> {
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: ListTile(
         leading: Image.asset(
-          widget.cartItem.mobile!.imgpath,
+          widget.cartItem.shoes!.imgpath,
           width: 60,
           height: 60,
           fit: BoxFit.cover,
         ),
         title: Text(
-          widget.cartItem.mobile!.name,
+          widget.cartItem.shoes!.name,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          widget.cartItem.mobile!.price,
+          widget.cartItem.shoes!.price,
           style: TextStyle(color: const Color.fromARGB(195, 158, 158, 158)),
         ),
         trailing: IconButton(

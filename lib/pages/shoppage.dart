@@ -67,11 +67,11 @@ class _ShopPageState extends State<ShopPage> {
                 Container(
                   height: 200, // Adjust the height as needed
                   child: Consumer<Cart>(
-                    builder: (context, value, child) => ListView.builder(
+                    builder: (context, value, child) => PageView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: value.productList.length,
+                      itemCount: value.mobileList.length,
                       itemBuilder: (context, index) {
-                        Mobile mobile = value.getMobilesList()[index];
+                        Mobile mobile = value.getMobileList()[index];
                         return Mobiles(
                           mobile: mobile,
                           onTap: () => additemtocart(mobile),
@@ -89,7 +89,7 @@ class _ShopPageState extends State<ShopPage> {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   child: Text(
                     'Featured Products', // Add your desired title here
                     style: TextStyle(
@@ -101,9 +101,9 @@ class _ShopPageState extends State<ShopPage> {
                 Container(
                   height: 200, // Adjust the height as needed
                   child: Consumer<Cart>(
-                    builder: (context, value, child) => ListView.builder(
+                    builder: (context, value, child) => PageView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: value.shoeslist.length,
+                      itemCount: value.shoesList.length,
                       itemBuilder: (context, index) {
                         Shoes shoes = value.getShoesList()[index];
                         return ShoesSection(
@@ -129,27 +129,38 @@ class _ShopPageState extends State<ShopPage> {
               ),
             ),
           ),
-          SliverPadding(
-            padding: EdgeInsets.all(10),
-            sliver: Consumer<Cart>(
-              builder: (context, value, child) => SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10, // Adjust the spacing as needed
-                  crossAxisSpacing: 10, // Adjust the spacing as needed
-                  childAspectRatio: 0.7, // Adjust the aspect ratio as needed
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  child: Text(
+                    'Featured Products', // Add your desired title here
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    Mobile mobile = value.getMobilesList()[index];
-                    return Mobiles(
-                      mobile: mobile,
-                      onTap: () => additemtocart(mobile),
-                    );
-                  },
-                  childCount: value.productList.length,
+                Container(
+                  height: 200, // Adjust the height as needed
+                  child: Consumer<Cart>(
+                    builder: (context, value, child) => ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: value.shoesList.length,
+                      itemBuilder: (context, index) {
+                        Shoes shoes = value.getShoesList()[index];
+                        return ShoesSection(
+                          shoeprod: shoes,
+                          onTap: () => addshoestocart(shoes),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],

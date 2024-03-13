@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 
@@ -22,10 +22,19 @@ class _ProfileState extends State<Profile> {
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: Colors.pink,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 64,
+                    ),
+                    Text('E C H O T E A M'),
+                  ],
+                ),
               ),
-              title: Text("E C H O S H O P P I N G"),
+              //title: Text("E C H O S H O P P I N G"),
             ),
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
             floating: true,
             pinned: false,
             title: AppBar(
@@ -56,8 +65,26 @@ class _ProfileState extends State<Profile> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  height: 400,
-                  color: Colors.lightBlue,
+                  height: 100,
+                  color: Colors.white10,
+                  child: PageView(
+                    children: [
+                      Text(
+                        "Profile Settings",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "My Orders",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -68,8 +95,28 @@ class _ProfileState extends State<Profile> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  height: 400,
-                  color: Colors.lightBlue,
+                  height: 100,
+                  color: Colors.white10,
+                  child: PageView(
+                    children: [
+                      Text(
+                        "Settings",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            "profile settings",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                                backgroundColor: Colors.white),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -80,8 +127,19 @@ class _ProfileState extends State<Profile> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  height: 400,
-                  color: Colors.lightBlue,
+                  height: 100,
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Feedback",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -92,32 +150,22 @@ class _ProfileState extends State<Profile> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  height: 400,
-                  color: Colors.lightBlue,
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 400,
-                  color: Colors.lightBlue,
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 400,
-                  color: Colors.lightBlue,
+                  height: 100,
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Text(
+                        "LogOut",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.logout,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
