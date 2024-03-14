@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/products/cart.dart';
 import 'package:flutter_application_1/products/mobile.dart';
@@ -38,25 +40,31 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Consumer<Cart>(
       builder: (context, cart, _) {
-        List<CartItem> userCart = cart.getUserCart();
+        Set<CartItem> userCart = cart.getUserCart();
         return Scaffold(
           appBar: AppBar(
             title: Text('My Cart'),
+            automaticallyImplyLeading: false,
           ),
-          body: ListView.builder(
-            itemCount: userCart.length,
-            itemBuilder: (context, index) {
-              CartItem cartItem = userCart[index];
+          body: Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(10)),
+            child: ListView.builder(
+              itemCount: userCart.length,
+              itemBuilder: (context, index) {
+                CartItem cartItem = userCart.elementAt(index);
 
-              if (cartItem.mobile != null) {
-                return _buildMobileCartItem(cartItem, cartItem.mobile!);
-              } else if (cartItem.shoes != null) {
-                return _buildShoesCartItem(cartItem, cartItem.shoes!);
-              } else {
-                return SizedBox
-                    .shrink(); // Placeholder for other types of items
-              }
-            },
+                if (cartItem.mobile != null) {
+                  return _buildMobileCartItem(cartItem, cartItem.mobile!);
+                } else if (cartItem.shoes != null) {
+                  return _buildShoesCartItem(cartItem, cartItem.shoes!);
+                } else {
+                  return SizedBox
+                      .shrink(); // Placeholder for other types of items
+                }
+              },
+            ),
           ),
         );
       },
@@ -67,28 +75,48 @@ class _CartPageState extends State<CartPage> {
     return ListTile(
         leading: Image.asset(mobile.imgpath),
         title: Text(mobile.name),
-        subtitle: Text(mobile.price),
-        trailing: Column(
+        subtitle: Row(
           children: [
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () => removeItemformobile(cartItem, mobile),
+            Expanded(
+              child: Text("Price : Rs ${mobile.price}/-"),
             ),
-            IconButton(
-              icon: Icon(Icons.remove),
-              onPressed: () => removeItemformobile(cartItem, mobile),
-            ),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [Text("Quantity :${mobile.quantity} ")]),
           ],
-        ));
+        ),
+        trailing:
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+            onPressed: () => removeItemformobile(cartItem, mobile),
+          ),
+        ]));
   }
 
   Widget _buildShoesCartItem(CartItem cartItem, Shoes shoes) {
     return ListTile(
       leading: Image.asset(shoes.imgpath),
       title: Text(shoes.name),
-      subtitle: Text(shoes.price),
+      subtitle: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text("Price : Rs ${shoes.price}/-"),
+          ),
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text("Quantity :${shoes.quantity} "),
+          ]),
+        ],
+      ),
       trailing: IconButton(
-        icon: Icon(Icons.delete),
+        icon: Icon(
+          Icons.delete,
+          color: Colors.red,
+        ),
         onPressed: () => removeItem(cartItem, shoes),
       ),
     );

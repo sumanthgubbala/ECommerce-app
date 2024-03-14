@@ -14,28 +14,31 @@ class Cart extends ChangeNotifier {
   // List of products
   List<Mobile> mobileList = [
     Mobile(
-      name: "Samsung Galaxy",
-      price: "20,00",
-      description: " Android  5G 4GB RAM",
-      imgpath: 'assets/images/samsung23.jpg',
-    ),
+        name: "Samsung Galaxy",
+        price: "20,00",
+        description: " Android  5G 4GB RAM",
+        imgpath: 'assets/images/samsung23.jpg',
+        quantity: 1),
 
     Mobile(
-      name: "iphone",
-      price: "300,00",
-      imgpath: "assets/images/iphone15.jpg",
-      description: "new model forbidden",
-    ),
+        name: "iphone",
+        price: "300,00",
+        imgpath: "assets/images/iphone15.jpg",
+        description: "new model forbidden",
+        quantity: 1),
     Mobile(
         name: "Oneplus",
         price: "300,00",
         imgpath: "assets/images/oneplus12r.jpg",
-        description: "new model forbidden"),
+        description: "new model forbidden",
+        quantity: 1),
+
     Mobile(
         name: "Oneplus",
         price: "300,00",
         imgpath: "assets/images/oneplus12r.jpg",
-        description: "new model forbidden"),
+        description: "new model forbidden",
+        quantity: 1),
     // Add more mobiles here...
   ];
 
@@ -45,31 +48,32 @@ class Cart extends ChangeNotifier {
       price: "1000.0",
       description: 'new arrival',
       imgpath: 'assets/images/nikeair.jpg',
+      quantity: 1,
     ),
     Shoes(
-      name: "NIke Air 18",
-      price: "1000.0",
-      description: 'new arrival',
-      imgpath: 'assets/images/nikeair18.jpg',
-    ),
+        name: "NIke Air 18",
+        price: "1000.0",
+        description: 'new arrival',
+        imgpath: 'assets/images/nikeair18.jpg',
+        quantity: 1),
     Shoes(
-      name: "NIke womens Air",
-      price: "1000.0",
-      description: 'new arrival',
-      imgpath: 'assets/images/nikeairwomens.jpg',
-    ),
+        name: "NIke womens Air",
+        price: "1000.0",
+        description: 'new arrival',
+        imgpath: 'assets/images/nikeairwomens.jpg',
+        quantity: 1),
     Shoes(
-      name: "NIke",
-      price: "1000.0",
-      description: 'new arrival',
-      imgpath: 'assets/images/nikeair.jpg',
-    ),
+        name: "NIke",
+        price: "1000.0",
+        description: 'new arrival',
+        imgpath: 'assets/images/nikeair.jpg',
+        quantity: 1),
 
     // Add more shoes here...
   ];
 
   // List of products in the cart
-  List<CartItem> userCart = [];
+  Set<CartItem> userCart = {};
 
   // Get list of mobiles for sale
   List<Mobile> getMobileList() {
@@ -82,7 +86,7 @@ class Cart extends ChangeNotifier {
   }
 
   // Get list of products in the user's cart
-  List<CartItem> getUserCart() {
+  Set<CartItem> getUserCart() {
     return userCart;
   }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/components/bottom.dart';
 import 'package:flutter_application_1/pages/cart_page.dart';
 import 'package:flutter_application_1/pages/login.dart';
@@ -34,6 +35,7 @@ class _MyWidgetState extends State<Home> {
     CartPage(),
     OrderPage(),
     Profile(),
+    OrderPage(),
     LoginPage()
   ];
   @override
@@ -65,35 +67,68 @@ class _MyWidgetState extends State<Home> {
       ),
       drawer: Drawer(
         child: Container(
-          color: Colors.white,
-          child: ListView(
+          color: Colors.grey[100],
+          child: Column(
             children: [
-              DrawerHeader(
-                  child: Center(
-                child: Text(
-                  'E C H O',
-                  style: TextStyle(fontSize: 35),
+              Expanded(
+                child: ListView(
+                  children: [
+                    DrawerHeader(
+                      child: Center(
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CircleAvatar(
+                                radius: 40,
+                              ),
+                              Text(
+                                'E C H O',
+                                style: TextStyle(fontSize: 35),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.home),
+                      title: Text('H O M E'),
+                      onTap: () {
+                        navigateToPage(0);
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text('P R O F I L E'),
+                      onTap: () {
+                        navigateToPage(3);
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.shopping_cart),
+                      title: Text('C A R T'),
+                      onTap: () {
+                        navigateToPage(1);
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.shopping_cart_checkout),
+                      title: Text('O R D E R S'),
+                      onTap: () {
+                        navigateToPage(2);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
                 ),
-              )),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text('H O M E'),
-                onTap: () {
-                  navigateToPage(0);
-                  Navigator.pop(context);
-                },
               ),
               ListTile(
-                leading: Icon(Icons.person),
-                title: Text('P R O F I L E'),
-                onTap: () {
-                  navigateToPage(3);
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('L O G O U T'),
+                leading: Text('L O G O U T'),
+                title: Icon(Icons.logout),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => LoginPage(),

@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/products/shoes.dart';
+import 'package:provider/provider.dart';
 
-class ShoesSection extends StatelessWidget {
+import '../products/cart.dart';
+
+class ShoesSection extends StatefulWidget {
   Shoes shoeprod;
 
   void Function()? onTap;
@@ -11,77 +14,103 @@ class ShoesSection extends StatelessWidget {
   ShoesSection({super.key, required this.shoeprod, required this.onTap});
 
   @override
+  State<ShoesSection> createState() => _ShoesSectionState();
+}
+
+class _ShoesSectionState extends State<ShoesSection> {
+  void addshoestocart() {
+    Provider.of<Cart>(context, listen: false).addShoesToCart(widget.shoeprod);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Added ${widget.shoeprod.name} to cart!')),
+    );
+  }
+
+  void inc() {
+    setState(() {
+      widget.shoeprod.quantity++;
+    });
+  }
+
+  void dec() {
+    setState(() {
+      widget.shoeprod.quantity--;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 25),
-      width: 250,
-      height: 200,
-      decoration: BoxDecoration(
-          color: Colors.grey[100], borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClipRRect(
-            child: Image.network(
-              shoeprod.imgpath,
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-          ),
-          // Text(mobile.name),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Text(shoeprod.description,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Card(
+        elevation: 1,
+        margin: EdgeInsets.all(8),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Image.asset(
+                  widget.shoeprod.imgpath,
+                  height: 250,
+                  fit: BoxFit.fill,
+                ),
+                Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Column(children: [
+                      Text(
+                        widget.shoeprod.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Price :\nRs." + widget.shoeprod.price.toString(),
+                            textAlign: TextAlign.left,
+                          ),
+                          GestureDetector(
+                            onTap: addshoestocart,
+                            child: Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10))),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ])),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      shoeprod.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      shoeprod.price,
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.remove),
+                          onPressed: dec,
+                        ),
+                        Text('${widget.shoeprod.quantity}'),
+                        IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: inc,
+                        ),
+                      ],
                     )
                   ],
-                ),
-                //plus button
-                GestureDetector(
-                  onTap: onTap,
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10))),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                  ),
                 )
               ],
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

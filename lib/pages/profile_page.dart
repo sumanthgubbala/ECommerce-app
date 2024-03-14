@@ -1,176 +1,132 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.lightBlue,
-            expandedHeight: 300,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: Colors.pink,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Profile Picture and Information
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage:
+                        ExactAssetImage('assets/images/profile.jpg'),
+                    radius: 50,
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('E C H O '),
+                      Text('ECHO@example.com'),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+
+              // Order Section
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border:
+                        Border.all(color: const Color.fromARGB(85, 0, 0, 0))),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    CircleAvatar(
-                      radius: 64,
+                    Text(
+                      'My Orders',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    Text('E C H O T E A M'),
+                    Text(
+                      'Track order',
+                      style:
+                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
-              //title: Text("E C H O S H O P P I N G"),
-            ),
-            automaticallyImplyLeading: true,
-            floating: true,
-            pinned: false,
-            title: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              title: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyle(color: Colors.white),
-                  border: InputBorder.none,
-                ),
-                style: TextStyle(color: Colors.white),
-              ),
-              automaticallyImplyLeading: false,
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    // Perform search functionality here
-                  },
-                ),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 100,
-                  color: Colors.white10,
-                  child: PageView(
-                    children: [
-                      Text(
-                        "Profile Settings",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "My Orders",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+              SizedBox(height: 10),
+              // Implement ListView for Orders
+
+              // Wishlist Section
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'Wishlist',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 100,
-                  color: Colors.white10,
-                  child: PageView(
-                    children: [
-                      Text(
-                        "Settings",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            "profile settings",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 40,
-                                backgroundColor: Colors.white),
-                          ))
-                    ],
-                  ),
+              SizedBox(height: 10),
+              // Implement ListView for Wishlisted items
+
+              // Settings Section
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'Settings',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 100,
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Feedback",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+              SizedBox(height: 10),
+              Container(
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'ACCOUNTS',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
                         ),
-                      )
-                    ],
-                  ),
+                        Text(
+                          'ADD ACCOUNT',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                        Text(
+                          'LOGOUT',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ),
+
+              // Implement ListView for settings options (e.g., ListTile)
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 100,
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Text(
-                        "LogOut",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Icon(
-                        Icons.logout,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
