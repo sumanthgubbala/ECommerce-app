@@ -34,7 +34,7 @@ class _MyWidgetState extends State<Home> {
     ShopPage(),
     CartPage(),
     OrderPage(),
-    Profile(),
+    ProfileP(),
     OrderPage(),
     LoginPage()
   ];

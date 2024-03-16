@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/mobiletitle.dart';
 import 'package:flutter_application_1/components/shoeslist.dart';
 import 'package:flutter_application_1/products/shoes.dart';
+import '../components/mobillist.dart';
 import '../products/cart.dart';
 import '../products/mobile.dart';
 import 'package:provider/provider.dart';
@@ -93,7 +94,7 @@ class _ShopPageState extends State<ShopPage> {
                       itemCount: value.mobileList.length,
                       itemBuilder: (context, index) {
                         Mobile mobile = value.getMobileList()[index];
-                        return Mobiles(
+                        return Mobilellist(
                           mobile: mobile,
                           onTap: () => additemtocart(mobile),
                         );
