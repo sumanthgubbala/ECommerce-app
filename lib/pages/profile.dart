@@ -52,7 +52,7 @@ class Profile extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.account_circle, size: 30),
-                  subtitle: Text(usrName),
+                  subtitle: Text(fullName),
                   title: const Text("admin"),
                 ),
               ],

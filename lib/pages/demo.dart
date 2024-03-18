@@ -95,7 +95,7 @@ class _demoState extends State<demo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Helloo ${widget.user}",
+                "Hello, ${widget.user}",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 5),

@@ -24,7 +24,7 @@ class _SignUpState extends State<SignUp> {
   final gmail = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
-  var cur;
+  //var cur;
 
   final formKey = GlobalKey<FormState>();
   bool isVisible = false;
@@ -209,13 +209,13 @@ class _SignUpState extends State<SignUp> {
                             if (response.statusCode == 200) {
                               print('Data sent successfully');
                               setState(() {
-                                cur = username;
+                                // cur = username;
                               });
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          Home(username: cur)));
+                                          Home(username: "guest")));
                             } else {
                               print(
                                   'Failed to send data: ${response.statusCode}');

@@ -68,7 +68,7 @@ class _MobileGridState extends State<MobileGrid> {
                     child: Image.asset(
                       mobileList[index].imgpath,
                       width: 100,
-                      height: 70,
+                      height: 50,
                     ),
                   ),
                   Padding(
@@ -199,7 +199,7 @@ class _ShoesGridState extends State<ShoesGrid> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "30% off",
+                      "50% off",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -216,7 +216,7 @@ class _ShoesGridState extends State<ShoesGrid> {
                   child: Image.asset(
                     shoesList[index].imgpath,
                     width: 100,
-                    height: 90,
+                    height: 50,
                   ),
                 ),
                 Padding(
@@ -246,7 +246,7 @@ class _ShoesGridState extends State<ShoesGrid> {
                           ),
                           SizedBox(width: 2),
                           Text(
-                            '1,30,000',
+                            '2,000',
                             style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               fontSize: 13,
@@ -256,9 +256,9 @@ class _ShoesGridState extends State<ShoesGrid> {
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("${shoesList[index].quantity}"),
+                          // Text("${shoesList[index].quantity}"),
                           GestureDetector(
                             onTap: () => addshoestocart(shoesList[index]),
                             child: Container(

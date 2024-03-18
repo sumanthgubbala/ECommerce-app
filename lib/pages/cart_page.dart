@@ -6,6 +6,8 @@ import 'package:flutter_application_1/products/mobile.dart';
 import 'package:flutter_application_1/products/shoes.dart';
 import 'package:provider/provider.dart';
 
+import 'ordes_page.dart';
+
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
@@ -70,8 +72,14 @@ class _CartPageState extends State<CartPage> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                // Implement your confirm order logic here
-                // For example, you can navigate to a new page for order confirmation
+                cart.confirmOrder();
+                // Navigate to a new page (e.g., ConfirmedOrdersPage)
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmedOrdersPage(),
+                  ),
+                );
               },
               child: Text('Confirm Order'),
             ),

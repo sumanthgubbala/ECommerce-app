@@ -7,6 +7,7 @@ import 'package:flutter_application_1/components/bottom.dart';
 import 'package:flutter_application_1/pages/cart_page.dart';
 import 'package:flutter_application_1/pages/login.dart';
 import 'package:flutter_application_1/pages/orders_page.dart';
+import 'package:flutter_application_1/pages/ordes_page.dart';
 import 'package:flutter_application_1/pages/profile_page.dart';
 import 'package:flutter_application_1/pages/shoppage.dart';
 
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
         user: widget.username,
       ),
       CartPage(),
-      OrderPage(),
+      ConfirmedOrdersPage(),
       Profile(fullName: widget.username),
       OrderPage(),
       LoginPage()

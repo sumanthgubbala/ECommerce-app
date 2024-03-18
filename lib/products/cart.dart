@@ -15,27 +15,27 @@ class Cart extends ChangeNotifier {
   List<Mobile> mobileList = [
     Mobile(
         name: "Samsung Galaxy",
-        price: "20,00",
+        price: "80,00",
         description: " Android  5G 4GB RAM",
         imgpath: 'assets/images/samsung23.jpg',
         quantity: 1),
 
     Mobile(
         name: "iphone",
-        price: "300,00",
+        price: "80,000",
         imgpath: "assets/images/iphone15.jpg",
         description: "new model forbidden",
         quantity: 1),
     Mobile(
         name: "Oneplus",
-        price: "300,00",
+        price: "80,000",
         imgpath: "assets/images/oneplus12r.jpg",
         description: "new model forbidden",
         quantity: 1),
 
     Mobile(
         name: "Oneplus",
-        price: "300,00",
+        price: "80,000",
         imgpath: "assets/images/oneplus12r.jpg",
         description: "new model forbidden",
         quantity: 1),
@@ -116,5 +116,19 @@ class Cart extends ChangeNotifier {
   void incmobileQuantity(CartItem item) {
     item.mobile?.quantity++;
     notifyListeners();
+  }
+
+  Set<CartItem> confirmedOrders = {};
+
+  // Confirm order
+  void confirmOrder() {
+    confirmedOrders.addAll(userCart);
+    userCart.clear(); // Clear the user cart after confirming the order
+    notifyListeners();
+  }
+
+  // Get list of confirmed orders
+  Set<CartItem> getConfirmedOrders() {
+    return confirmedOrders;
   }
 }
