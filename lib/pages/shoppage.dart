@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/components/mobiletitle.dart';
 import 'package:flutter_application_1/components/shoeslist.dart';
+import 'package:flutter_application_1/pages/demo.dart';
 import 'package:flutter_application_1/products/shoes.dart';
 import '../components/mobillist.dart';
 import '../products/cart.dart';
@@ -10,13 +12,23 @@ import '../products/mobile.dart';
 import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({Key? key}) : super(key: key);
+  var user;
+  ShopPage({this.user});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
 }
 
 class _ShopPageState extends State<ShopPage> {
+  List<Color> clrs = [Colors.red, Colors.blue, Colors.pink, Colors.orange];
+  var imglis = [
+    'images/iphone12.png',
+    'images/iphone12.png',
+    'images/iphone12.png',
+    'images/iphone12.png',
+  ];
+  var icon = [];
+
   void additemtocart(Mobile mobile) {
     Provider.of<Cart>(context, listen: false).addMobileToCart(mobile);
     ScaffoldMessenger.of(context).showSnackBar(
@@ -40,23 +52,92 @@ class _ShopPageState extends State<ShopPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.lightBlue,
-            expandedHeight: 100,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: Colors.pink,
-              ),
-              title: Container(
-                child: Text(
-                  "E C H O S H O P P I N G",
-                  style: TextStyle(fontSize: 18),
-                ),
+          SliverToBoxAdapter(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: demo(
+                    user: widget.user,
+                  ),
+                )
+              ])),
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(left: 15),
+                    child: Row(
+                      children: [
+                        for (int i = 0; i < 4; i++)
+                          Container(
+                            margin: EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.only(left: 10),
+                            height: MediaQuery.of(context).size.height / 3.5,
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            decoration: BoxDecoration(
+                              color: clrs[i],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "30% off on summer collection",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 90,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "Coupon Code",
+                                            style: TextStyle(
+                                              color: clrs[i],
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Image.asset(
+                                  imglis[i],
+                                  height: 180,
+                                  width: 110,
+                                )
+                              ],
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
             ),
-            automaticallyImplyLeading: false,
-            floating: false,
-            pinned: false,
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -88,17 +169,21 @@ class _ShopPageState extends State<ShopPage> {
                 ),
                 Container(
                   height: 450,
-                  child: Consumer<Cart>(
-                    builder: (context, value, child) => PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: value.mobileList.length,
-                      itemBuilder: (context, index) {
-                        Mobile mobile = value.getMobileList()[index];
-                        return Mobilellist(
-                          mobile: mobile,
-                          onTap: () => additemtocart(mobile),
-                        );
-                      },
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Consumer<Cart>(
+                      builder: (context, cart, child) => Row(
+                        children: List.generate(
+                          cart.mobileList.length,
+                          (index) {
+                            Mobile mobile = cart.getMobileList()[index];
+                            return Mobilellist(
+                              mobile: mobile,
+                              onTap: () => additemtocart,
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),

@@ -107,4 +107,14 @@ class Cart extends ChangeNotifier {
     userCart.remove(item);
     notifyListeners();
   }
+
+  void incshoeQuantity(CartItem item) {
+    item.shoes?.quantity++;
+    notifyListeners();
+  }
+
+  void incmobileQuantity(CartItem item) {
+    item.mobile?.quantity++;
+    notifyListeners();
+  }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/grid_page.dart';
+import 'package:flutter_application_1/pages/home_page.dart';
 import 'package:flutter_application_1/pages/intro.dart';
+import 'package:flutter_application_1/pages/intro/onboard.dart';
 // ignore: unused_import
 import 'package:flutter_application_1/pages/registration.dart';
+import 'package:flutter_application_1/pages/shoppage.dart';
 import 'package:flutter_application_1/products/cart.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -24,13 +28,13 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
           home: AnimatedSplashScreen(
-            splash: Image.asset('images/logo.jpg'),
+            splash: Lottie.asset('images/intro.json'),
             nextScreen: IntroPage(),
-            splashTransition: SplashTransition.decoratedBoxTransition,
-            backgroundColor: Colors.white54,
-            duration: 2000,
-            
+            splashIconSize: 300,
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Colors.blueAccent,
 
+            //lottie: Lottie.assets("images/loading.json"),
           ),
         ),
       ),

@@ -30,7 +30,7 @@ class _CartPageState extends State<CartPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('${cartItem.mobile!.name} removed from cart.'),
-        duration: Duration(seconds: 2),
+        duration: Duration(seconds: 1),
       ),
     );
     setState(() {});
@@ -66,6 +66,16 @@ class _CartPageState extends State<CartPage> {
               },
             ),
           ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Implement your confirm order logic here
+                // For example, you can navigate to a new page for order confirmation
+              },
+              child: Text('Confirm Order'),
+            ),
+          ),
         );
       },
     );
@@ -85,16 +95,18 @@ class _CartPageState extends State<CartPage> {
                 children: [Text("Quantity :${mobile.quantity} ")]),
           ],
         ),
-        trailing:
-            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          IconButton(
-            icon: Icon(
-              Icons.delete,
-              color: Colors.red,
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+              onPressed: () => removeItemformobile(cartItem, mobile),
             ),
-            onPressed: () => removeItemformobile(cartItem, mobile),
-          ),
-        ]));
+          ],
+        ));
   }
 
   Widget _buildShoesCartItem(CartItem cartItem, Shoes shoes) {

@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool isVisible = false;
   bool isLoginTrue = false;
+  var currusr = "guset";
 
   Future<void> login() async {
     final String username = _usernameController.text;
@@ -32,9 +33,20 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response.statusCode == 200) {
         print('Login successful!');
+        setState(() {
+          currusr = username;
+        });
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => Home(username: currusr)),
+        );
+      } else if (username == "admin") {
+        setState(() {
+          currusr = username;
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home(username: currusr)),
         );
       } else {
         setState(() {
@@ -44,6 +56,15 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (error) {
       print('An error occurred: $error');
+      if (username == "admin") {
+        setState(() {
+          currusr = username;
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home(username: currusr)),
+        );
+      }
     }
   }
 

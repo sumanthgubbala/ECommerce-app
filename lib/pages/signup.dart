@@ -9,6 +9,7 @@ import 'package:flutter_application_1/pages/login.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
+import 'package:path/path.dart';
 //import 'package:to_do_list_app/Authtentication/login.dart';
 
 class SignUp extends StatefulWidget {
@@ -23,6 +24,7 @@ class _SignUpState extends State<SignUp> {
   final gmail = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  var cur;
 
   final formKey = GlobalKey<FormState>();
   bool isVisible = false;
@@ -206,10 +208,14 @@ class _SignUpState extends State<SignUp> {
 
                             if (response.statusCode == 200) {
                               print('Data sent successfully');
+                              setState(() {
+                                cur = username;
+                              });
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Home()));
+                                      builder: (context) =>
+                                          Home(username: cur)));
                             } else {
                               print(
                                   'Failed to send data: ${response.statusCode}');

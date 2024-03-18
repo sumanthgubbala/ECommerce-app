@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/components/bottom.dart';
@@ -9,14 +10,21 @@ import 'package:flutter_application_1/pages/orders_page.dart';
 import 'package:flutter_application_1/pages/profile_page.dart';
 import 'package:flutter_application_1/pages/shoppage.dart';
 
+import 'profile.dart';
+
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String username;
+
+  Home({Key? key, required this.username}) : super(key: key);
 
   @override
-  State<Home> createState() => _MyWidgetState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyWidgetState extends State<Home> {
+class _HomeState extends State<Home> {
+  List<Color> clrs = [Colors.red, Colors.blue, Colors.white, Colors.orange];
+  var imglis = [];
+  var icon = [];
   int selectedIndex = 0;
   void navigateBottom(int index) {
     setState(() {
@@ -30,16 +38,18 @@ class _MyWidgetState extends State<Home> {
     });
   }
 
-  final List<Widget> _page = [
-    ShopPage(),
-    CartPage(),
-    OrderPage(),
-    ProfileP(),
-    OrderPage(),
-    LoginPage()
-  ];
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _page = [
+      ShopPage(
+        user: widget.username,
+      ),
+      CartPage(),
+      OrderPage(),
+      Profile(fullName: widget.username),
+      OrderPage(),
+      LoginPage()
+    ];
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 234, 239, 239),
       appBar: AppBar(
@@ -83,7 +93,7 @@ class _MyWidgetState extends State<Home> {
                                 radius: 40,
                               ),
                               Text(
-                                'E C H O',
+                                widget.username,
                                 style: TextStyle(fontSize: 35),
                               ),
                             ],
@@ -143,6 +153,45 @@ class _MyWidgetState extends State<Home> {
         OnTabChange: (int index) => navigateBottom(index),
       ),
       body: _page[selectedIndex],
+    );
+  }
+
+  Widget _screen() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.only(left: 15),
+      child: Row(
+        children: [
+          for (int i = 0; i < 3; i++)
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              padding: EdgeInsets.only(left: 10),
+              height: MediaQuery.of(context).size.height / 5.5,
+              width: MediaQuery.of(context).size.width / 1.5,
+              decoration: BoxDecoration(
+                color: clrs[i],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "30% off",
+                    style: TextStyle(
+                      color: Colors.white10,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Container(
+                    width: 80,
+                    padding: EdgeInsets.all(10),
+                  )
+                ],
+              ),
+            )
+        ],
+      ),
     );
   }
 }
